@@ -111,3 +111,33 @@ from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 print(f"Training set size: {len(X_train)} rows")
 print(f"Testing set size: {len(X_test)} rows")
+
+# Task 5.1: Choose and initialize the model
+from sklearn.linear_model import LogisticRegression
+model = LogisticRegression()
+
+# Task 5.2: Train the model
+model.fit(X_train, y_train)
+print("Model training complete!")
+
+# Task 5.3: Make predictions
+y_pred = model.predict(X_test)
+print("Predictions on the test set:", y_pred[:10])
+
+# Task 5.4: Evaluate the model
+from sklearn.metrics import accuracy_score, classification_report
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Accuracy: {accuracy:.2f}")
+print("Classification Report:")
+print(classification_report(y_test, y_pred))
+
+# Task 5.5: Visualize the confusion matrix
+from sklearn.metrics import ConfusionMatrixDisplay
+ConfusionMatrixDisplay.from_estimator(model, X_test, y_test, cmap='Blues')
+plt.title("Confusion Matrix")
+plt.show()
+
+# (Optional) Task 5.6: Save the model
+import joblib
+joblib.dump(model, 'penguin_gender_model.pkl')
+print("Model saved as 'penguin_gender_model.pkl'")
