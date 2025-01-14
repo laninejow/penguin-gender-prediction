@@ -42,3 +42,33 @@ print(penguins_cleaned.head())
 print("Missing values after cleaning:")
 print(penguins_cleaned.isnull().sum())
 print(f"Number of duplicate rows after cleaning: {penguins_cleaned.duplicated().sum()}")
+
+# Task 3.1: Check basic statistics
+print("Summary statistics for numerical columns:")
+print(penguins_cleaned.describe())
+
+# Task 3.2: Plot distributions of numerical features
+penguins_cleaned.hist(figsize=(10, 8), bins=20)
+plt.suptitle("Distribution of Numerical Features")
+plt.show()
+
+# Task 3.3: Visualize feature differences by gender
+sns.boxplot(x='sex', y='bill_length_mm', data=penguins_cleaned)
+plt.title('Bill Length by Gender')
+plt.show()
+
+sns.boxplot(x='sex', y='body_mass_g', data=penguins_cleaned)
+plt.title('Body Mass by Gender')
+plt.show()
+
+# Task 3.4: Pair plot to show relationships between features
+sns.pairplot(penguins_cleaned, hue='sex', diag_kind='kde')
+plt.suptitle("Pair Plot of Numerical Features by Gender", y=1.02)
+plt.show()
+
+# Task 3.5: Correlation heatmap
+corr_matrix = penguins_cleaned.corr()
+plt.figure(figsize=(8, 6))
+sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', linewidths=0.5)
+plt.title("Correlation Heatmap of Numerical Features")
+plt.show()
