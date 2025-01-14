@@ -141,3 +141,47 @@ plt.show()
 import joblib
 joblib.dump(model, 'penguin_gender_model.pkl')
 print("Model saved as 'penguin_gender_model.pkl'")
+
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score, classification_report
+
+# Decision Tree
+dt_model = DecisionTreeClassifier(random_state=42)
+dt_model.fit(X_train, y_train)
+y_pred_dt = dt_model.predict(X_test)
+accuracy_dt = accuracy_score(y_test, y_pred_dt)
+print(f"Decision Tree Accuracy: {accuracy_dt:.2f}")
+print("Classification Report for Decision Tree:")
+print(classification_report(y_test, y_pred_dt))
+
+# Random Forest
+rf_model = RandomForestClassifier(random_state=42, n_estimators=100)
+rf_model.fit(X_train, y_train)
+y_pred_rf = rf_model.predict(X_test)
+accuracy_rf = accuracy_score(y_test, y_pred_rf)
+print(f"Random Forest Accuracy: {accuracy_rf:.2f}")
+print("Classification Report for Random Forest:")
+print(classification_report(y_test, y_pred_rf))
+
+# KNN
+knn_model = KNeighborsClassifier(n_neighbors=5)
+knn_model.fit(X_train, y_train)
+y_pred_knn = knn_model.predict(X_test)
+accuracy_knn = accuracy_score(y_test, y_pred_knn)
+print(f"KNN Accuracy: {accuracy_knn:.2f}")
+print("Classification Report for KNN:")
+print(classification_report(y_test, y_pred_knn))
+
+# Compare model performance
+model_performance = {
+    "Logistic Regression": accuracy,
+    "Decision Tree": accuracy_dt,
+    "Random Forest": accuracy_rf,
+    "KNN": accuracy_knn
+}
+
+print("Model Performance Comparison:")
+for model, acc in model_performance.items():
+    print(f"{model}: {acc:.2f}")
