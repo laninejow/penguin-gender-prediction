@@ -22,3 +22,23 @@ print("Column names:", penguins.columns.tolist())
 # Check for missing values in each column
 print("Missing values in each column:")
 print(penguins.isnull().sum())
+
+# Task 2.1: Drop rows with missing values
+penguins_cleaned = penguins.dropna()
+print(f"Rows before cleaning: {len(penguins)}")
+print(f"Rows after cleaning: {len(penguins_cleaned)}")
+
+# Task 2.2: Check and drop duplicate rows
+duplicates = penguins_cleaned.duplicated().sum()
+print(f"Number of duplicate rows: {duplicates}")
+penguins_cleaned = penguins_cleaned.drop_duplicates()
+
+# Task 2.3: Reset the index
+penguins_cleaned.reset_index(drop=True, inplace=True)
+print("First 5 rows after cleaning:")
+print(penguins_cleaned.head())
+
+# Task 2.4: Verify the cleaned dataset
+print("Missing values after cleaning:")
+print(penguins_cleaned.isnull().sum())
+print(f"Number of duplicate rows after cleaning: {penguins_cleaned.duplicated().sum()}")
