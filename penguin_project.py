@@ -72,3 +72,42 @@ plt.figure(figsize=(8, 6))
 sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', linewidths=0.5)
 plt.title("Correlation Heatmap of Numerical Features")
 plt.show()
+
+# List all columns
+print("All columns:", penguins_cleaned.columns.tolist())
+
+# Identify numerical columns (excluding categorical columns like 'species' and 'island')
+numerical_features = ['bill_length_mm', 'bill_depth_mm', 'flipper_length_mm', 'body_mass_g']
+print("Selected numerical features:", numerical_features)
+
+# Task 4.1: Identify numerical features
+numerical_features = ['bill_length_mm', 'bill_depth_mm', 'flipper_length_mm', 'body_mass_g']
+print("Selected numerical features:", numerical_features)
+
+# Task 4.2: Check correlations among numerical features
+corr_matrix = penguins_cleaned[numerical_features].corr()
+print("Correlation matrix:")
+print(corr_matrix)
+
+plt.figure(figsize=(8, 6))
+sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', linewidths=0.5)
+plt.title("Correlation Heatmap of Selected Features")
+plt.show()
+
+# Task 4.3: Choose final features
+final_features = ['bill_length_mm', 'bill_depth_mm', 'flipper_length_mm', 'body_mass_g']
+print("Final selected features:", final_features)
+
+# Task 4.4: Prepare the data for modeling
+X = penguins_cleaned[final_features]
+y = penguins_cleaned['sex']
+print("Features (X):")
+print(X.head())
+print("Target (y):")
+print(y.head())
+
+# Task 4.5: Split the data into training and testing sets
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+print(f"Training set size: {len(X_train)} rows")
+print(f"Testing set size: {len(X_test)} rows")
